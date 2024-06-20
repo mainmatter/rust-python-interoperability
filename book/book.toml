@@ -1,0 +1,12 @@
+[book]
+authors = ["Luca Palmieri (Mainmatter)"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Rust-Python interoperability"
+
+[output.html]
+git-repository-url = "https://github.com/mainmatter/rust-python-interoperability"
+
+[preprocessor.exercise-linker]
+exercise_root_url = "https://github.com/mainmatter/rust-python-interoperability/tree/main/exercises"
