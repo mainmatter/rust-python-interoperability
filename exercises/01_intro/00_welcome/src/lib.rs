@@ -27,4 +27,18 @@ mod tests {
     fn test_welcome() {
         assert_eq!(greeting(), "I'm ready to start the course!");
     }
+
+    #[test]
+    fn rye_is_installed_and_on_path() {
+        let output = std::process::Command::new("rye")
+            .arg("--version")
+            .output()
+            .expect("Failed to run rye");
+
+        assert!(
+            output.status.success(),
+            "`rye --version` failed:\n{}",
+            String::from_utf8_lossy(&output.stderr)
+        );
+    }
 }

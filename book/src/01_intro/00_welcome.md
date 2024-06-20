@@ -5,17 +5,15 @@ Welcome to **"Rust-Python interoperability"**!
 This course will teach you how to write Python extensions in Rust,
 and how to call Rust code from Python.
 
-We assume you are familiar with both Rust and Python, but we don't assume any prior knowledge of writing Python extensions in Rust. We will provide a brief explanation and references whenever we rely on advanced language features.
-
-You'll build up your knowledge in small, manageable steps.
+We assume you are familiar with both Rust and Python, but we don't assume any prior interoperability knowledge. We will provide a brief explanation and references whenever we rely on advanced language features in either language.
 
 ## Methodology
 
 This course is based on the "learn by doing" principle.\
-It has been designed to be interactive and hands-on.
+You'll build up your knowledge in small, manageable steps. It has been designed to be interactive and hands-on.
 
 [Mainmatter](https://mainmatter.com/rust-consulting/) developed this course
-to be delivered in a classroom setting, over a single day: each attendee advances
+to be delivered in a classroom setting, over a whole day: each attendee advances
 through the lessons at their own pace, with an experienced instructor providing
 guidance, answering questions and diving deeper into the topics as needed.\
 If you're interested in attending one of our training sessions, or if you'd like to
@@ -25,6 +23,30 @@ You can also follow the course on your own, but we recommend you find a friend o
 a mentor to help you along the way should you get stuck. You can
 also find solutions to all exercises in the
 [`solutions` branch of the GitHub repository](https://github.com/mainmatter/rust-python-interoperability/tree/solutions).
+
+## Prerequisites
+
+To follow this course, you must install:
+
+- [Rust](https://www.rust-lang.org/tools/install)
+- [`rye`](https://rye.astral.sh/), a Python package manager
+
+If Rust is already installed on your machine, make sure to update it to the latest version:
+
+```bash
+# If you installed Rust using `rustup`, the recommended way,
+# you can update to the latest stable toolchain with:
+rustup update
+```
+
+These commands should successfully run on your machine:
+
+```bash
+cargo --version
+rye --version
+```
+
+Don't start the course until you have these tools installed and working.
 
 ## Structure
 
@@ -87,7 +109,7 @@ This course was written by [Luca Palmieri](https://www.lpalmieri.com/), Principa
 Consultant at [Mainmatter](https://mainmatter.com/rust-consulting/).\
 Luca has been working with Rust since 2018, initially at TrueLayer and then at AWS.\
 Luca is the author of ["Zero to Production in Rust"](https://zero2prod.com),
-the go-to resource for learning how to build backend applications in Rust, and ["100 Exercises to Learn Rust"], a learn-by-doing introduction to Rust itself.\
+the go-to resource for learning how to build backend applications in Rust, and ["100 Exercises to Learn Rust"](https://rust-exercises.com), a learn-by-doing introduction to Rust itself.\
 He is also the author and maintainer of a variety of open-source Rust projects, including
 [`cargo-chef`](https://github.com/LukeMathWalker/cargo-chef),
 [Pavex](https://pavex.dev) and [`wiremock`](https://github.com/LukeMathWalker/wiremock-rs).
