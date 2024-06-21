@@ -1,3 +1,3 @@
 [workspace]
-members = ["exercises/*/*"]
+members = ["exercises/*/*/extension"]
 resolver = "2"

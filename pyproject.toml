@@ -1,0 +1,9 @@
+[project]
+name = "workshop"
+version = "0.1.0"
+
+[tool.rye]
+virtual = true
+
+[tool.rye.workspace]
+members = ["exercises/*/*/sample", "exercises/*/*/extension"]
