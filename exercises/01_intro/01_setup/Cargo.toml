@@ -1,0 +1,11 @@
+[package]
+name = "setup"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "setup"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = "0.22"

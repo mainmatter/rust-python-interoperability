@@ -1,0 +1,12 @@
+[project]
+name = "workshop"
+version = "0.1.0"
+dependencies = [
+    "pip>=24.1.1",
+]
+
+[tool.rye]
+virtual = true
+
+[tool.rye.workspace]
+members = ["exercises/*/*/sample", "exercises/*/*"]

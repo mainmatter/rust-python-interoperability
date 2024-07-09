@@ -1,0 +1,12 @@
+[[verification]]
+command = "cargo"
+args = ["test"]
+
+# Faster feedback than `rye build`
+[[verification]]
+command = "maturin"
+args = ["develop"]
+
+[[verification]]
+command = "rye"
+args = ["test", "--pyproject", "sample/pyproject.toml"]
