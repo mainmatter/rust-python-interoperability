@@ -37,7 +37,7 @@ struct MyType {
 
 impl IntoPy<Py<PyAny>> for MyType {
     fn into_py(self, py: Python<'_>) -> Py<PyAny> {
-        PyLong::new(py, self.value).into()
+        self.value.to_object(py)
     }
 }
 ```
