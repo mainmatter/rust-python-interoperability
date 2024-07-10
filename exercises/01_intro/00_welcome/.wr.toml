@@ -1,3 +1,7 @@
 [[verification]]
 command = "cargo"
 args = ["test"]
+
+[[verification]]
+command = "rye"
+args = ["sync"]

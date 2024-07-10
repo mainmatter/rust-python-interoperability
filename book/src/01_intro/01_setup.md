@@ -23,16 +23,6 @@ We'll use `maturin` to build, package and publish Python extensions written in R
 rye install "maturin>=1.6"
 ```
 
-`maturin` provides a quick way to scaffold a new Python extension module:
-
-```bash
-# You can use a different binding library rather than `pyo3`, 
-# but we won't cover those alternatives in this course.
-maturin new --bindings="pyo3" my_extension
-```
-
-We used `maturing new` to scaffold all extension modules in this course.
-
 ## Exercise structure
 
 All exercises in this course will follow the same structure:
@@ -211,18 +201,14 @@ To work around the issue, do the following:
    sysconfigpatcher ~/.rye/py/cpython@3.12.3/
    ```
 
-3. Clean the build directory:
+3. Destroy and then recreate the `target` directory:
    ```bash
-   cargo clean
+   rm -rf target
+   mkdir -p target/debug
    ```
 
-4. `cargo build` should work now, but `cargo test` may fail with this error:
-   ```plaintext
-   dyld[38907]: Library not loaded: /install/lib/libpython3.12.dylib
-   ```
+4. Copy the `libpython3.12.*` file to the `target/debug` directory.\
    The file extension will vary depending on your platform (`.so` on Linux, `.dylib` on macOS, `.dll` on Windows).
-
-5. Copy the `libpython3.12.*` file to the `target/debug` directory.\
    On macOS:
    ```bash
    cp ~/.rye/py/cpython@3.12.3/lib/libpython3.12.dylib target/debug
@@ -236,7 +222,8 @@ To work around the issue, do the following:
    copy %USERPROFILE%\.rye\py\cpython@3.12.3\lib\python3.dll target\debug
    ```
 
-Both `cargo build` and `cargo test` should work now.
+`wr` should now be able to build the extension module without issues and run the tests. No linker errors
+should be surfaced.
 
 ## References
 
