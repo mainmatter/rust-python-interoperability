@@ -42,7 +42,8 @@ You can also specify the name of the module explicitly using the `name` argument
 rather than relying on the name of the annotated function:
 
 ```rust
-#[pymodule(name = "setup")]
+#[pymodule]
+#[pyo3(name = "setup")]
 fn random_name(m: &Bound<'_, PyModule>) -> PyResult<()> {
    // [...]
 }
