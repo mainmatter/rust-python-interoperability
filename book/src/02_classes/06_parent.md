@@ -72,7 +72,7 @@ This can be done using another one of `pyo3`'s smart pointers: `PyRef`.
 impl Child {
     // [...]
     
-    fn greet(self_: Bound<'_, PyRef<Self>>) {
+    fn greet(self_: PyRef<Self>) {
         todo!()
     }
 }
@@ -87,7 +87,7 @@ which returns a reference to the parent class.
 impl Child {
     // [...]
     
-    fn greet(self_: Bound<'_, PyRef<Self>>) {
+    fn greet(self_: PyRef<Self>) {
         // This is now a reference to a `Parent` instance!
         let parent = self_.as_super();
         println!("Hi, I'm {} and I'm {} years old!", parent.name, self_.age);
