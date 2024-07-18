@@ -5,5 +5,4 @@ We've covered the key concepts and most common use cases, but make sure to check
 the [official `pyo3` documentation](https://pyo3.rs/v0.22.1/class) whenever you need more information about
 a specific feature (e.g. how do I declare a class to be frozen? How do I make my class iterable?).
 
-Before moving on to the next chapter, let's take a moment to reflect on what we've learned so far
-with one last exercise.
+Let's take a moment to reflect on what we've learned so far with one last exercise.
