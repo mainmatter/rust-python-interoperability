@@ -7,4 +7,5 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { workspace = true }
+num-bigint = "0.4.6"
+pyo3 = { workspace = true, features = ["num-bigint"] }

@@ -8,7 +8,7 @@ fn it_works() -> bool {
 
 /// A Python module implemented in Rust.
 #[pymodule]
-fn learn_modules(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn modules(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(it_works, m)?)?;
     Ok(())
 }

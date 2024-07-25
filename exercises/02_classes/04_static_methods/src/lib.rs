@@ -13,6 +13,11 @@ impl Discount {
     fn new(percentage: f64) -> Self {
         Discount { percentage }
     }
+
+    #[staticmethod]
+    fn default() -> Discount {
+        Self { percentage: 0.1 }
+    }
 }
 
 #[pymodule]
