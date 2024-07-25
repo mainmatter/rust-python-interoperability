@@ -189,41 +189,22 @@ You may run into this error when using `rye` and `pyo3` together:
 ```
 
 This seems to be a [bug in `rye`](https://github.com/astral-sh/rye/issues/1050#issuecomment-2079270180).\
-To work around the issue, do the following:
+To work around the issue, run the following command in the root of the course repository:
 
-1. Install `sysconfigpatcher`:
-   ```bash
-   rye install --git 'https://github.com/bluss/sysconfigpatcher' sysconfigpatcher
-   ```
-
-2. Patch the `sysconfig` module to point to the correct paths:
-   ```bash
-   sysconfigpatcher ~/.rye/py/cpython@3.12.3/
-   ```
-
-3. Destroy and then recreate the `target` directory:
-   ```bash
-   rm -rf target
-   mkdir -p target/debug
-   ```
-
-4. Copy the `libpython3.12.*` file to the `target/debug` directory.\
-   The file extension will vary depending on your platform (`.so` on Linux, `.dylib` on macOS, `.dll` on Windows).
-   On macOS:
-   ```bash
-   cp ~/.rye/py/cpython@3.12.3/lib/libpython3.12.dylib target/debug
-   ```
-   On Linux:
-   ```bash
-   cp ~/.rye/py/cpython@3.12.3/lib/libpython3.12.so target/debug
-   ```
-   On Windows:
-   ```cmd
-   copy %USERPROFILE%\.rye\py\cpython@3.12.3\lib\python3.dll target\debug
-   ```
+```bash
+cargo run -p "patcher"
+```
 
 `wr` should now be able to build the extension module without issues and run the tests. No linker errors
 should be surfaced.
+
+<div class="warning">
+
+The `patcher` tool is a temporary workaround for a bug in `rye`.\
+It hasn't been tested on Windows: please [open an issue](https://github.com/mainmatter/rust-python-interoperability/issues) 
+if you encounter any problems.
+
+</div>
 
 ## References
 
