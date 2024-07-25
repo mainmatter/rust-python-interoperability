@@ -2,7 +2,7 @@ use pyo3::prelude::*;
 
 #[pyfunction]
 // TODO: Implement a function that returns a list containing the first `n` numbers in Fibonacci's sequence.
-fn fibonacci(n: todo!()) -> todo!() {
+fn fibonacci(/* n: TODO */) /* -> TODO */ {
     todo!()
 }
 
