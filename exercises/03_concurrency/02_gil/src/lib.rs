@@ -19,8 +19,22 @@ fn word_count(text: Bound<'_, PyString>, n_threads: usize) -> PyResult<usize> {
     // We go down this route, rather than asking for a `&str`
     // directly as an argument, to avoid an extra copy of the string
     let text = text.to_str()?;
+    let chunks = split_into_chunks(text, n_threads);
+    let mut count = 0;
 
-    todo!()
+    std::thread::scope(|scope| {
+        let mut handles = Vec::with_capacity(n_threads);
+        for chunk in chunks {
+            let handle = scope.spawn(move || word_count_chunk(chunk));
+            handles.push(handle);
+        }
+
+        for handle in handles {
+            count += handle.join().unwrap();
+        }
+    });
+
+    Ok(count)
 }
 
 /// Count words in a single chunk of text.
