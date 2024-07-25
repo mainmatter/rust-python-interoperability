@@ -25,7 +25,7 @@ child.greet() # Prints "Hello, Alice!"
 
 ## `pyo3` and inheritance
 
-`pyo3` supports inheritance as well, via additional attributes on the `#[pyclass]` macro.  
+`pyo3` supports inheritance as well, via additional attributes on the `#[pyclass]` macro.\
 To understand how it works, let's try to translate the Python example above to Rust. We'll start with defining
 the base class, `Parent`:
 
@@ -81,7 +81,7 @@ Whenever you initialize a subclass, you need to make sure that the parent class 
 We start by calling `Parent::new` to create an instance of the parent class. We then initialize `Child`, via `Self { age }`.
 We then use `PyClassInitializer` to return both the parent and child instances together.
 
-Even though `Child` doesn't have a `greet` method on the Rust side, you'll be able to call it from Python since the 
+Even though `Child` doesn't have a `greet` method on the Rust side, you'll be able to call it from Python since the
 generated `Child` class inherits it from `Parent`.
 
 ## Nested inheritance

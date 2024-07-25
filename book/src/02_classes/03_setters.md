@@ -11,8 +11,9 @@ struct Wallet {
     balance: i32,
 }
 ```
+
 This is convenient, but it's not always desirable!\
-Let's introduce an additional constraint to our `Wallet` struct: the balance should never go below a pre-determined 
+Let's introduce an additional constraint to our `Wallet` struct: the balance should never go below a pre-determined
 overdraft threshold.
 We'd start by enforcing this constraint in the constructor method:
 
@@ -101,6 +102,6 @@ wallet.balance = -200  # Now raises a `ValueError`
 The field is associated with its setter using a conventional naming strategy for the setter method: `set_<field_name>`.
 You can also explicitly specify the field name in the `#[setter]` attribute, like this: `#[setter(balance)]`.
 
-Custom getters are defined in a similar way using the `#[getter]` attribute. The naming convention for 
-getter methods is `<field_name>`, but you can also specify the field name explicitly in the attribute—e.g. 
+Custom getters are defined in a similar way using the `#[getter]` attribute. The naming convention for
+getter methods is `<field_name>`, but you can also specify the field name explicitly in the attribute—e.g.
 `#[getter(balance)]`.

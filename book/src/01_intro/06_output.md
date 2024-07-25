@@ -25,7 +25,7 @@ The output type of your `#[pyfunction]` must implement `IntoPy`.
 
 ## Case study: a newtype
 
-Let's look at a simple example: a newtype that wraps a `u64`. 
+Let's look at a simple example: a newtype that wraps a `u64`.
 We want it to be represented as a "plain" integer in Python.
 
 ```rust

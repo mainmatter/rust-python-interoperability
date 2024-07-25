@@ -60,7 +60,7 @@ E       AttributeError: 'builtins.Wallet' object has no attribute 'balance'
 tests/test_sample.py:8: AttributeError
 ```
 
-The same error would occur even if you made `balance` a public field.  
+The same error would occur even if you made `balance` a public field.
 
 To make the field accessible to Python, you must add a **getter**.\
 This can be done using the `#[pyo3(get)]` attribute:

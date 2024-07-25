@@ -201,7 +201,7 @@ should be surfaced.
 <div class="warning">
 
 The `patcher` tool is a temporary workaround for a bug in `rye`.\
-It hasn't been tested on Windows: please [open an issue](https://github.com/mainmatter/rust-python-interoperability/issues) 
+It hasn't been tested on Windows: please [open an issue](https://github.com/mainmatter/rust-python-interoperability/issues)
 if you encounter any problems.
 
 </div>

@@ -101,6 +101,5 @@ impl Wallet {
 }
 ```
 
-Since you can directly refer to the class in a Rust static method (i.e. the `Self` type), you won't find yourself 
+Since you can directly refer to the class in a Rust static method (i.e. the `Self` type), you won't find yourself
 using class methods as often as you would in Python.
-

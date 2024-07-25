@@ -33,8 +33,8 @@ via the `?` operator. On the Python side, this error will be raised as a Python 
 You should be intentional about the types of exceptions you raise. What kind of error are you signaling?
 What is the caller expected to catch?
 
-All built-in Python exceptions are available in `pyo3::exceptions`—e.g. `pyo3::exceptions::PyValueError` for 
-a [`ValueError`](https://docs.python.org/3/library/exceptions.html#ValueError). You can use their `new_err` 
+All built-in Python exceptions are available in `pyo3::exceptions`—e.g. `pyo3::exceptions::PyValueError` for
+a [`ValueError`](https://docs.python.org/3/library/exceptions.html#ValueError). You can use their `new_err`
 method to create an instance.
 
 ## Panics

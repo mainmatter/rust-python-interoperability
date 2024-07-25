@@ -5,7 +5,7 @@ Welcome to **"Rust-Python interoperability"**!
 In this course, you'll learn how to write Rust code that can be called from Python,
 using `pyo3` crate to create Python extension modules.
 
-We assume you are familiar with the basics of both Rust and Python, but we don't assume any prior interoperability knowledge. 
+We assume you are familiar with the basics of both Rust and Python, but we don't assume any prior interoperability knowledge.
 We will provide explanations and references whenever we rely on advanced features in either language.
 
 > [!NOTE]
@@ -16,7 +16,7 @@ We will provide explanations and references whenever we rely on advanced feature
 
 ## Getting started
 
-Run 
+Run
 
 ```bash
 # Install necessary tools
@@ -37,9 +37,9 @@ to open the companion book for this course in your browser.
   to make sure you're running on the latest stable version.
 - _(Optional but recommended)_ An IDE with Rust autocompletion support.
   We recommend one of the following:
-    - [RustRover](https://www.jetbrains.com/rust/);
-    - [Visual Studio Code](https://code.visualstudio.com) with
-      the [`rust-analyzer`](https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer) extension.
+  - [RustRover](https://www.jetbrains.com/rust/);
+  - [Visual Studio Code](https://code.visualstudio.com) with
+    the [`rust-analyzer`](https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer) extension.
 
 ## Solutions
 

@@ -40,9 +40,9 @@ under the "Rust" table column.
 
 ## Conversion cost
 
-Going from a Python object to a Rust type is not free—e.g. the 
+Going from a Python object to a Rust type is not free—e.g. the
 in-memory representation of a Python list doesn't match the in-memory representation of a Rust `Vec`.\
-The conversion introduces a (usually small) overhead that you'll have to incur every time you invoke 
+The conversion introduces a (usually small) overhead that you'll have to incur every time you invoke
 your Rust function from Python. It's a good trade-off if you end up performing enough
 computational work in Rust to amortize the conversion cost.
 

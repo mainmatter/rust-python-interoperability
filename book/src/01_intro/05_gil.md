@@ -1,17 +1,17 @@
 # Global Interpreter Lock (GIL)
 
-If you go back to [`pyo3`'s documentation on arguments](https://pyo3.rs/v0.22.0/conversions/tables#argument-types), 
+If you go back to [`pyo3`'s documentation on arguments](https://pyo3.rs/v0.22.0/conversions/tables#argument-types),
 you'll find a table column listing so called "Python-native" types.
 What are they, and why would you use them?
 
 ## Python-native types
 
 There is overhead in converting a Python object into a Rust-native type.\
-That overhead might dominate the cost of invoking your Rust function if the function itself isn't doing much 
+That overhead might dominate the cost of invoking your Rust function if the function itself isn't doing much
 computational work. In those cases, it can be desirable to work directly using Python's in-memory representation of the object.
 That's where the `Py*` types come in: they give you direct access to Python objects, with minimal overhead[^type-check].
 
-Out of the entire family of `Py*` types, `PyAny` deserves a special mention. 
+Out of the entire family of `Py*` types, `PyAny` deserves a special mention.
 It's the most general Python-native type in `pyo3`: it stands for an arbitrary Python object.
 You can use it whenever you don't know the exact type of the object you're working with, or you don't care about it.
 
@@ -46,8 +46,8 @@ error[E0277]: the trait bound `&PyList: PyFunctionArgument<'_, '_>` is not satis
     = note: required for `&PyList` to implement `PyFunctionArgument<'_, '_>`
 ```
 
-The error message is a bit cryptic because it mentions a number of private `pyo3` traits (`PyFunctionArgument` and 
-`FromPyObjectBound`), but the gist of it is that `&PyList` doesn't implement `FromPyObject`. That's 
+The error message is a bit cryptic because it mentions a number of private `pyo3` traits (`PyFunctionArgument` and
+`FromPyObjectBound`), but the gist of it is that `&PyList` doesn't implement `FromPyObject`. That's
 true for all `Py*` types.
 
 Confusing, isn't it? How is possible that Python-native types, that require **no conversion**, don't implement the
@@ -72,7 +72,7 @@ without you necessarily holding the GIL, a recipe for disaster.
 in a safe way.
 
 `Python<'py>` is the cornerstone of the entire system: it's a **token type** that guarantees that you're holding the GIL.
-All APIs that require you to hold the GIL will, either directly or indirectly, require you to provide a `Python<'py>` 
+All APIs that require you to hold the GIL will, either directly or indirectly, require you to provide a `Python<'py>`
 token as proof.
 
 `pyo3` will automatically acquire the GIL behind the scenes whenever you invoke a Rust function from Python. In fact,
@@ -138,13 +138,13 @@ when we're interacting with the Python object during the conversion.
 - [`Python<'py>`](https://docs.rs/pyo3/0.22.1/pyo3/marker/struct.Python.html)
 - [Global Interpreter Lock](https://docs.python.org/3/c-api/init.html#thread-state-and-the-global-interpreter-lock)
 - [Official guidance on Python-native vs Rust-native types](https://pyo3.rs/v0.22.0/conversions/tables#using-rust-library-types-vs-python-native-types)
-  
+
 ## Footnotes
 
-[^type-check]: `pyo3` still needs to ensure that the Python object you're working with is of the expected type. 
-    It'll therefore perform an `isinstance` check before handing you the object—e.g. 
-    checking that an object is indeed a list before giving you a `PyList` argument. The only exception to this rule
-    is `PyAny`, which can represent an arbitrary Python object.
+[^type-check]: `pyo3` still needs to ensure that the Python object you're working with is of the expected type.
+It'll therefore perform an `isinstance` check before handing you the object—e.g.
+checking that an object is indeed a list before giving you a `PyList` argument. The only exception to this rule
+is `PyAny`, which can represent an arbitrary Python object.
 
-[^cpython]: CPython is the reference implementation of Python, written in C. 
-    It's the most widely used Python interpreter and what most people refer to when they say "Python".
+[^cpython]: CPython is the reference implementation of Python, written in C.
+It's the most widely used Python interpreter and what most people refer to when they say "Python".
