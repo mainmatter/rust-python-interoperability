@@ -8,7 +8,7 @@
 // You can also find solutions to all exercises in the `solutions` git branch.
 pub fn greeting() -> &'static str {
     // TODO: fix me 👇
-    "I'm ready to start _!"
+    "I'm ready to start the course!"
 }
 
 // Your solutions will be automatically verified by a set of tests.
