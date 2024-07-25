@@ -3,7 +3,7 @@
 Welcome to **"Rust-Python interoperability"**!
 
 In this course, you'll learn how to write Rust code that can be called from Python,
-using `pyo3` crate to create Python extension modules.
+using `pyo3` to create Python extension modules.
 
 We assume you are familiar with the basics of both Rust and Python, but we don't assume any prior interoperability knowledge.
 We will provide explanations and references whenever we rely on advanced features in either language.
