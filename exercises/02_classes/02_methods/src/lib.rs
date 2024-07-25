@@ -47,6 +47,11 @@ impl ShoppingOrder {
             quantity,
         })
     }
+
+    /// Returns the total cost of the order.
+    fn total(&self) -> u64 {
+        self.price * self.quantity
+    }
 }
 
 #[pymodule]

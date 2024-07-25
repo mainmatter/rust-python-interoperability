@@ -8,7 +8,45 @@
 //  attributes of an `Employee`.
 use pyo3::prelude::*;
 
+#[pyclass(subclass)]
+struct Person {
+    #[pyo3(get)]
+    first_name: String,
+    #[pyo3(get)]
+    last_name: String,
+}
+
+#[pymethods]
+impl Person {
+    #[new]
+    fn new(first_name: String, last_name: String) -> Self {
+        Person { first_name, last_name }
+    }
+
+    fn full_name(&self) -> String {
+        format!("{} {}", self.first_name, self.last_name)
+    }
+}
+
+#[pyclass(extends = Person)]
+struct Employee {
+    #[pyo3(get)]
+    id: u64,
+}
+
+#[pymethods]
+impl Employee {
+    #[new]
+    fn new(first_name: String, last_name: String, id: u64) -> PyClassInitializer<Self> {
+        let person = Person::new(first_name, last_name);
+        let employee = Employee { id };
+        PyClassInitializer::from(person).add_subclass(employee)
+    }
+}
+
 #[pymodule]
 fn inheritance(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_class::<Person>()?;
+    m.add_class::<Employee>()?;
     Ok(())
 }
