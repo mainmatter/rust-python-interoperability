@@ -3,7 +3,7 @@
 //  of a `Person`.
 //  `Person` should also have a method named `full_name` that returns the full name of the person.
 //  Then define a subclass named `Employee` that inherits from `Person` and adds an
-//  `id` attribute and a constructor that sets the `id` attribute.
+//  unsigned integer `id` attribute and a constructor that sets the `id` attribute.
 //  It should be possible to access the `first_name`, `last_name` and `id`
 //  attributes of an `Employee`.
 use pyo3::prelude::*;

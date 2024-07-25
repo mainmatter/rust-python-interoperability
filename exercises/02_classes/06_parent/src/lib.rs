@@ -1,4 +1,4 @@
-// TODO: Define a base class named `Account`, with a `balance` property.
+// TODO: Define a base class named `Account`, with a floating point `balance` property.
 //  Then define a subclass named `AccountWithHistory`.
 //  `AccountWithHistory` adds a `history` attribute: every time the `balance` is modified,
 //  the old balance is stored in the `history` list. `history` can be accessed but not modified

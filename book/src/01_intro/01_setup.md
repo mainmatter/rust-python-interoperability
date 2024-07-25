@@ -38,7 +38,7 @@ You will have to modify the Rust code in the extension module to make the tests 
 Let's explore the structure of the extension module for this section.
 
 ```plaintext
-01_intro
+01_setup
 ├── sample
 ├── src
 │   └── lib.rs
@@ -179,7 +179,7 @@ Things will get a lot more interesting over the coming sections, I promise!
 
 ## Troubleshooting
 
-You may into this error when using `rye` and `pyo3` together:
+You may run into this error when using `rye` and `pyo3` together:
 
 ```plaintext
 <compiler output>

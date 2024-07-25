@@ -1,29 +1,31 @@
 # Modify the Rust extension to get the test below to pass
 # Do NOT modify the test itself!
+import pytest
+
 from outro2 import Discount, CappedDiscount, SeasonalDiscount, ExpiredDiscount
 from datetime import datetime, timedelta, UTC
 
 def test_discount():
     discount = Discount(0.1)
-    assert discount.percentage == 0.1
-    assert discount.apply(100) == 90
+    assert discount.percentage == pytest.approx(0.1)
+    assert discount.apply(100) == pytest.approx(90)
 
 def test_capped_discount():
     discount = CappedDiscount(0.6, 50)
-    assert discount.percentage == 0.6
-    assert discount.cap == 50
-    assert discount.apply(100) == 50
-    assert discount.apply(50) == 20
+    assert discount.percentage == pytest.approx(0.6)
+    assert discount.cap == pytest.approx(50)
+    assert discount.apply(100) == pytest.approx(50)
+    assert discount.apply(50) == pytest.approx(20)
 
 def test_seasonal_discount():
     current = datetime.now(UTC)
     from_ = current - timedelta(days=2)
     to = current + timedelta(days=2)
     discount = SeasonalDiscount(0.1, from_, to)
-    assert discount.percentage == 0.1
+    assert discount.percentage == pytest.approx(0.1)
     assert discount.from_ == from_
     assert discount.to == to
-    assert discount.apply(100) == 90
+    assert discount.apply(100) == pytest.approx(90)
 
 # Validation tests
 def test_discount_validation():
