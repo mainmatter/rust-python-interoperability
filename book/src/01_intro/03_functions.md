@@ -1,7 +1,7 @@
 # Functions
 
 Empty modules are not that useful: let's add some functions to our extension!\
-As you've seen in the ["Setup" section](01_setup), `pyo3` provides another procedural macro
+As you've seen in the ["Setup" section](01_setup.md), `pyo3` provides another procedural macro
 to define functions that can be called from Python: `#[pyfunction]`.
 
 Back then we used it to define the `it_works` function:
