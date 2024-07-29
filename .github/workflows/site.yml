@@ -39,8 +39,6 @@ jobs:
         with:
           name: book
           path: book/book
-            # Commit and push all changed files.
-          # Must only affect files that are listed in "paths-ignore".
 
   formatter:
     runs-on: ubuntu-latest
