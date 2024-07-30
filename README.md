@@ -16,18 +16,8 @@ We will provide explanations and references whenever we rely on advanced feature
 
 ## Getting started
 
-Run
-
-```bash
-# Install necessary tools
-cargo install mdbook
-cargo install --git https://github.com/mainmatter/100-exercises-to-learn-rust mdbook-exercise-linker
-
-# Serve the book locally
-cd book && mdbook serve --port 3012 --open
-```
-
-to open the companion book for this course in your browser.
+Open [the companion book for this course](https://rust-exercises.com/rust-python-interop/) in your browser.
+Follow the instructions there to get started.
 
 ## Requirements
 
