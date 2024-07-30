@@ -1,9 +1,7 @@
 # Welcome
 
-Welcome to **"Rust-Python interoperability"**!
-
-This course will teach you how to write Python extensions in Rust,
-and how to call Rust code from Python.
+Welcome to **"Rust-Python interoperability"**!\
+This course will teach you how to call Rust code from Python, packaged as a native extension module.
 
 We assume you are familiar with both Rust and Python, but we don't assume any prior interoperability knowledge. We will provide a brief explanation and references whenever we rely on advanced language features in either language.
 
