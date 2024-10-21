@@ -20,7 +20,7 @@ To invoke Rust code from Python we need to create a **Python extension module**.
 We'll use `maturin` to build, package and publish Python extensions written in Rust. Let's install it:
 
 ```bash
-rye install "maturin>=1.6"
+uv add "maturin>=1.7"
 ```
 
 ## Exercise structure
@@ -166,7 +166,7 @@ features = ["pyo3/extension-module"]
 ```
 
 It specifies the build system, the extension name and version, the required Python version, and the features to enable when building the extension module.
-This is what `rye` looks at when building the extension module, before delegating the build
+This is what `uv` looks at when building the extension module, before delegating the build
 process to `maturin`, which in turn invokes `cargo` to compile the Rust code.
 
 ## What do I need to do?
@@ -176,35 +176,6 @@ That's why the exercise for this section is fairly boring—we want to verify
 that you can build and test a Python extension module without issues.
 
 Things will get a lot more interesting over the coming sections, I promise!
-
-## Troubleshooting
-
-You may run into this error when using `rye` and `pyo3` together:
-
-```plaintext
-<compiler output>
-= note: ld: warning: search path '/install/lib' not found
-          ld: library 'python3.12' not found
-          clang: error: linker command failed with exit code 1
-```
-
-This seems to be a [bug in `rye`](https://github.com/astral-sh/rye/issues/1050#issuecomment-2079270180).\
-To work around the issue, run the following command in the root of the course repository:
-
-```bash
-cargo run -p "patcher"
-```
-
-`wr` should now be able to build the extension module without issues and run the tests. No linker errors
-should be surfaced.
-
-<div class="warning">
-
-The `patcher` tool is a temporary workaround for a bug in `rye`.\
-It hasn't been tested on Windows: please [open an issue](https://github.com/mainmatter/rust-python-interoperability/issues)
-if you encounter any problems.
-
-</div>
 
 ## References
 
