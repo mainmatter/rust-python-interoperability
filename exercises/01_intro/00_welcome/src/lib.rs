@@ -29,15 +29,15 @@ mod tests {
     }
 
     #[test]
-    fn rye_is_installed_and_on_path() {
-        let output = std::process::Command::new("rye")
+    fn uv_is_installed_and_on_path() {
+        let output = std::process::Command::new("uv")
             .arg("--version")
             .output()
-            .expect("Failed to run rye");
+            .expect("Failed to run uv");
 
         assert!(
             output.status.success(),
-            "`rye --version` failed:\n{}",
+            "`uv --version` failed:\n{}",
             String::from_utf8_lossy(&output.stderr)
         );
     }

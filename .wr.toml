@@ -2,11 +2,12 @@
 command = "cargo"
 args = ["test"]
 
-# Faster feedback than `rye build`
 [[verification]]
-command = "maturin"
-args = ["develop"]
+command = "uv"
+# We use `--all-packages` to avoid having to specify `pytest` as a dev
+# dependency in all packages.
+args = ["sync", "--all-packages"]
 
 [[verification]]
-command = "rye"
-args = ["test", "--pyproject", "sample/pyproject.toml"]
+command = "uv"
+args = ["run", "pytest"]

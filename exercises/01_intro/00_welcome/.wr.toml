@@ -3,5 +3,5 @@ command = "cargo"
 args = ["test"]
 
 [[verification]]
-command = "rye"
+command = "uv"
 args = ["sync"]

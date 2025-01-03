@@ -1,17 +1,18 @@
 [project]
 name = "parent_sample"
 version = "0.1.0"
-dependencies = []
+dependencies = [
+  "parent",
+]
 readme = "README.md"
-requires-python = ">= 3.8"
+requires-python = ">=3.11"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.rye]
-managed = true
-dev-dependencies = [
+[dependency-groups]
+dev = [
   "pytest>=8.2.2",
 ]
 
