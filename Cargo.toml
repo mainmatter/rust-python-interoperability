@@ -4,7 +4,7 @@ resolver = "2"
 
 [workspace.dependencies]
 anyhow = "1"
-pyo3 = "0.22"
+pyo3 = "0.23.3"
 semver = "1.0.23"
 serde = "1.0.204"
 serde_json = "1.0.120"
