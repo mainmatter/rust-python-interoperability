@@ -27,7 +27,7 @@ The output type of your `#[pyfunction]` must implement `IntoPyObject`.
 - `self`: the Rust value you want to convert into a Python object.
 - `Python<'py>`: a GIL token that you can use to create new Python objects.
 
-The conversion can fail, so the method returns a `Result`.  
+The conversion can fail, so the method returns a `Result`.\
 The output type itself is more complex, so let's break it down using an example.
 
 ## Case study: a newtype
@@ -72,29 +72,29 @@ impl<'py> IntoPyObject<'py> for MyType {
 
 ### The `Output` associated type
 
-Let's focus on the `Output` associated type for a moment.  
+Let's focus on the `Output` associated type for a moment.\
 In almost all cases, you'll be setting `Output` to `Bound<'py, Self::Target>`[^syntax]. You're creating a new Python
 object and its lifetime is tied to the Python runtime.
 
-In a few cases, you might be able to rely on [`Borrowed<'a, 'py, Self::Target>`](https://docs.rs/pyo3/0.23.3/pyo3/prelude/struct.Borrowed.html) 
-instead. 
+In a few cases, you might be able to rely on [`Borrowed<'a, 'py, Self::Target>`](https://docs.rs/pyo3/0.23.3/pyo3/prelude/struct.Borrowed.html)
+instead.
 It's slightly faster[^conversation], but it's limited to scenarios where you are borrowing from an existing Python object—fairly
 rare for an `IntoPyObject` implementation.
 
 There are no other options for `Output`, since `Output` must implement
-[the `BoundObject` trait](https://docs.rs/pyo3/0.23.3/pyo3/conversion/trait.BoundObject.html), 
-the trait is [sealed](https://predr.ag/blog/definitive-guide-to-sealed-traits-in-rust/) and 
+[the `BoundObject` trait](https://docs.rs/pyo3/0.23.3/pyo3/trait.BoundObject.html),
+the trait is [sealed](https://predr.ag/blog/definitive-guide-to-sealed-traits-in-rust/) and
 those two types are the only implementors within `pyo3`.\
 If it helps, think of `Output` as an enum with two variants: `Bound` and `Borrowed`.
 
 ## Provided implementations
 
 `pyo3` provides out-of-the-box implementations of `IntoPyObject` for many Rust types, as well as for all `Py*` types.
-Check out [its documentation](https://docs.rs/pyo3/0.23.3/pyo3/conversion/trait.IntoPyObject.html#foreign-impls) 
+Check out [its documentation](https://docs.rs/pyo3/0.23.3/pyo3/conversion/trait.IntoPyObject.html#foreign-impls)
 for an exhaustive list.
 
-[^syntax]: The actual syntax is a bit more complex: `type Output = Bound<'py, <Self as IntoPyObject<'py>>::Target>>;`. 
-    We've simplified it for clarity.
+[^syntax]: The actual syntax is a bit more complex: `type Output = Bound<'py, <Self as IntoPyObject<'py>>::Target>>;`.
+We've simplified it for clarity.
 
 [^conversation]: In addition to its documentation, you may find [this issue](https://github.com/PyO3/pyo3/issues/4467)
-    useful to understand the trade-offs between `&Bound` and `Borrowed`.
+useful to understand the trade-offs between `&Bound` and `Borrowed`.
