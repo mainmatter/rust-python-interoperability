@@ -1,15 +1,29 @@
 [build-system]
-requires = ["maturin>=1.6,<2.0"]
+requires = ["maturin>=1.8,<2.0"]
 build-backend = "maturin"
 
 [project]
 name = "output"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 classifiers = [
   "Programming Language :: Rust",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dynamic = ["version"]
+version = "0.1.0"
+
 [tool.maturin]
 features = ["pyo3/extension-module"]
+
+[tool.uv.config-settings]
+# Faster feedback on Rust builds
+build-args = "--profile=dev"
+
+[tool.uv]
+cache-keys = ["pyproject.toml", "Cargo.toml", "src/*.rs"]
+
+[tool.uv.sources]
+output = { workspace = true }
+
+[tool.uv.workspace]
+members = ["sample"]

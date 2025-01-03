@@ -27,7 +27,7 @@ also find solutions to all exercises in the
 To follow this course, you must install:
 
 - [Rust](https://www.rust-lang.org/tools/install)
-- [`rye`](https://rye.astral.sh/), a Python package manager
+- [`uv`](https://docs.astral.sh/uv/), a Python package manager
 
 If Rust is already installed on your machine, make sure to update it to the latest version:
 
@@ -41,7 +41,7 @@ These commands should successfully run on your machine:
 
 ```bash
 cargo --version
-rye --version
+uv --version
 ```
 
 Don't start the course until you have these tools installed and working.

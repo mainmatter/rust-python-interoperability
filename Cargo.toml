@@ -1,5 +1,5 @@
 [workspace]
-members = ["exercises/*/*", "patcher"]
+members = ["exercises/*/*"]
 resolver = "2"
 
 [workspace.dependencies]
