@@ -79,7 +79,7 @@ impl Child {
 ```
 
 `PyRef` represents an immutable reference to the Python object.\
-It allows us, in particular, to call the [`as_super`](https://docs.rs/pyo3/0.22.1/pyo3/pycell/struct.PyRef.html#method.as_super) method,
+It allows us, in particular, to call the [`as_super`](https://docs.rs/pyo3/0.23.3/pyo3/pycell/struct.PyRef.html#method.as_super) method,
 which returns a reference to the parent class.
 
 ```rust

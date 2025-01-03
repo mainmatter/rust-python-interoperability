@@ -31,9 +31,9 @@ fn my_module(m: &Bound<'_, PyModule>) -> PyResult<()> {
 }
 ```
 
-## `IntoPy`
+## `IntoPyObject`
 
-Rust types that have been annotated with `#[pyclass]` automatically implement the `IntoPy` trait, thus
+Rust types that have been annotated with `#[pyclass]` automatically implement the `IntoPyObject` trait, thus
 allowing you to return them from your `#[pyfunction]`s.
 
 For example, you can define a function that creates a new `Wallet` instance:

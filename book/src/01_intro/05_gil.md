@@ -134,8 +134,8 @@ when we're interacting with the Python object during the conversion.
 
 ## References
 
-- [`FromPyObject`](https://docs.rs/pyo3/0.22.1/pyo3/conversion/trait.FromPyObject.html)
-- [`Python<'py>`](https://docs.rs/pyo3/0.22.1/pyo3/marker/struct.Python.html)
+- [`FromPyObject`](https://docs.rs/pyo3/0.23.3/pyo3/conversion/trait.FromPyObject.html)
+- [`Python<'py>`](https://docs.rs/pyo3/0.23.3/pyo3/marker/struct.Python.html)
 - [Global Interpreter Lock](https://docs.python.org/3/c-api/init.html#thread-state-and-the-global-interpreter-lock)
 - [Official guidance on Python-native vs Rust-native types](https://pyo3.rs/v0.22.0/conversions/tables#using-rust-library-types-vs-python-native-types)
 

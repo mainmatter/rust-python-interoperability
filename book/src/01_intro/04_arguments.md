@@ -53,4 +53,4 @@ Don't try to use them to solve the exercise for this section: we'll cover them i
 
 ## References
 
-- [The `FromPyObject` trait](https://docs.rs/pyo3/0.22.0/pyo3/conversion/trait.FromPyObject.html)
+- [The `FromPyObject` trait](https://docs.rs/pyo3/0.23.3/pyo3/conversion/trait.FromPyObject.html)

@@ -61,7 +61,7 @@ name = "setup"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = "0.21.1"
+pyo3 = "0.23.0"
 ```
 
 Two things stand out in this file compared to a regular Rust project:
