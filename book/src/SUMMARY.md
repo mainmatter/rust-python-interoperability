@@ -17,3 +17,4 @@
   - [Inheritance](02_classes/05_inheritance.md)
   - [Parent class](02_classes/06_parent.md)
   - [Outro](02_classes/07_outro.md)
+- [Concurrency](03_concurrency/00_concurrency.md)
