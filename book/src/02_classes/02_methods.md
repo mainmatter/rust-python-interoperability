@@ -44,7 +44,7 @@ You can't annotate multiple `impl` blocks with `#[pymethods]` for the same class
 Rust's metaprogramming capabilities.\
 There is a way to work around this issue using some linker dark magic, via the
 `multiple-pymethods` feature flag, but it comes with a penalty in terms of compile times as well as limited cross-platform support.
-Check out [`pyo3`'s documentation](https://pyo3.rs/v0.22.1/class#implementation-details) for more details.
+Check out [`pyo3`'s documentation](https://pyo3.rs/v0.23.3/class#implementation-details) for more details.
 
 ## Footnotes
 

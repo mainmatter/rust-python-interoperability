@@ -35,7 +35,7 @@ Python objects into Rust types.
 ## Available implementations
 
 `pyo3` provides implementations of `FromPyObject` for a large number of types—e.g. `i32`, `f64`, `String`, `Vec`, etc.
-You can find an exhaustive list in [`pyo3`'s guide](https://pyo3.rs/v0.22.0/conversions/tables#argument-types),
+You can find an exhaustive list in [`pyo3`'s guide](https://pyo3.rs/v0.23.3/conversions/tables#argument-types),
 under the "Rust" table column.
 
 ## Conversion cost
