@@ -1,5 +1,9 @@
 [workspace]
 members = ["exercises/*/*", "verifier"]
+exclude = [
+    "exercises/03_concurrency/00_introduction",
+    "exercises/03_concurrency/01_python_threads",
+]
 resolver = "2"
 
 [workspace.dependencies]

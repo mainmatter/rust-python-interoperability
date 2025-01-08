@@ -1,4 +1,4 @@
-# Python's threads
+# Threads
 
 ## The overhead of multiprocessing
 
@@ -33,16 +33,34 @@ That's not a major issue if the data is small, but it can become a problem on la
 For example, if we're working with 8 GB of text, we'll end up with at least 16 GB of memory usage: 8 GB for the
 parent process and 8 GB split among the child processes. Not ideal!
 
-We could try to circumvent this issue by using [shared memory](https://docs.python.org/3/library/multiprocessing.shared_memory.html),
-but that's not always possible nor easy to do.
+We could try to circumvent this issue[^mmap], but that's not always possible nor easy to do.\
+A more straightforward solution is to use **threads** instead of processes.
 
-## Threads to the rescue
+## Threads
 
-As we discussed in the previous chapter, distinct processes don't share memory. Threads within the same process, on the other hand, do.
-If we restructure our solution to use threads instead of processes, we can avoid the overhead of deep copying data.
+A **thread** is an execution context **within a process**.\
+Threads share the same memory space and resources as the process that spawned them, thus allowing them to communicate
+and share data with one another more easily than processes can.
 
-Let's try!
+Threads, just like processes, are operating system constructs.\
+The operating system's scheduler is in charge of deciding which thread to run at any given time, partitioning CPU time
+among them.
 
+## The `threading` module
+
+Python's `threading` module provides a high-level interface for working with threads.\
+The API of the `Thread` class, in particular, mirrors what you already know from the `Process` class:
+
+- A thread is created by calling the `Thread` constructor and passing it a target function to execute as well as
+  any arguments that function might need.
+- The thread is launched by calling its `start` method, and we can wait for it to finish by calling `join`.
+- If we want to communicate between threads, we can use `Queue` objects, from the `queue` module, which are shared between threads.
+
+## References:
+
+- [`threading` module](https://docs.python.org/3/library/threading.html)
+- [`Thread` class](https://docs.python.org/3/library/threading.html#threading.Thread)
+- [`Queue` class](https://docs.python.org/3/library/queue.html)
 
 [^pickle]: To be more precise, the `multiprocessing` module uses the `pickle` module to serialize the objects
    that must be passed as arguments to the child process.
@@ -50,3 +68,6 @@ Let's try!
    On the other side of the pipe, the child process deserializes the byte stream back into Python objects using `pickle`
    and passes them to the target function.\
    This all system has higher overhead than a "simple" deep copy.
+
+[^mmap]: Common workarounds include memory-mapped files and shared-memory objects, but these can be quite
+  difficult to work with. They also suffer from portability issues, as they rely on OS-specific features.

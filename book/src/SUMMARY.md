@@ -17,5 +17,6 @@
   - [Inheritance](02_classes/05_inheritance.md)
   - [Parent class](02_classes/06_parent.md)
   - [Outro](02_classes/07_outro.md)
-- [Multithreading](03_multithreading/00_introduction.md)
-  - [Python's threads](03_multithreading/01_python_threads.md)
+- [Concurrency](03_concurrency/00_introduction.md)
+  - [Python's threads](03_concurrency/01_python_threads.md)
+  - [The GIL problem](03_concurrency/02_gil.md)
