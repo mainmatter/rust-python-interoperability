@@ -1,4 +1,4 @@
-# Concurrency
+# Multithreading
 
 Up until now, we've kept things quite simple: all our code was designed for sequential execution, on both the Python and Rust side.\
 It's time to spice things up a bit and explore concurrency!
@@ -9,7 +9,7 @@ In particular, we want to look at:
 - How to perform some processing in Rust, while allowing Python code to perform other tasks in the meantime
 - How we can synchronize across threads in Rust, keeping Python's GIL in mind
 
-We'll limit our exploration to threads, without venturing into the realm of `async`/`await`.
+We'll limit our exploration to threads and processes, without venturing into the realm of `async`/`await`.
 
 ## Threads and processes
 
@@ -67,9 +67,14 @@ We'll explore what this looks like for Rust in the next sections.
 
 ### Free-threading mode
 
-Before moving on it's worth mentioning that Python's concurrency model is likely to undergo some significant changes 
-in the future due to the introduction of [`CPython`'s free-threading mode](https://docs.python.org/3/howto/free-threading-python.html).
-We won't cover it in this book, but it's worth keeping an eye on it as it matures out of the experimental phase.
+The section above captures the current state of Python's concurrency model. There are some exciting changes on the horizon, though!
 
-[^mmap]: Common workaround include memory-mapped files and shared-memory objects, but these can be quite
+[`CPython`'s free-threading mode](https://docs.python.org/3/howto/free-threading-python.html) is an experimental feature 
+that aims to remove the GIL entirely.\
+It would allow multiple threads to execute Python code simultaneously, without forcing developers to rely on multiprocessing.
+
+We won't cover the new free-threading mode in this course, 
+but it's worth keeping an eye on it as it matures out of the experimental phase.
+
+[^mmap]: Common workarounds include memory-mapped files and shared-memory objects, but these can be quite
   difficult to work with. They also suffer from portability issues, as they rely on OS-specific features.

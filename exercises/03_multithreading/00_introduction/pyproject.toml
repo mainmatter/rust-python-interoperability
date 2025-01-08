@@ -1,0 +1,18 @@
+[project]
+name = "mprocessing"
+version = "0.1.0"
+dependencies = []
+readme = "README.md"
+requires-python = ">=3.11"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mprocessing"]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.2.2",
+]
