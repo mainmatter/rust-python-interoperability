@@ -1,29 +1,34 @@
-from multiprocessing import Process, Queue
+from threading import Thread
+from queue import Queue
 
 
 # Return the number of words in `text` using `n_processes` processes.
 # You'll need to:
-# - create a result queue to store the results of each process
-# - launch up to `n` processes in a loop, storing each process handle in a list
-# - join each process in a loop, to wait for them to finish
+# - create a queue to store the results of each process
+# - launch up to `n` threads in a loop, storing each thread handle in a list
+# - join each thread in a loop, to wait for them to finish
 # - drain the result queue into a list
 # - sum the results in the list to get the final count
 #
 # We provide a function to split the text into chunks as well as
-# a function to perform the counting in each process.
+# a function to perform the counting in each thread.
 #
 # Relevant links:
-# - https://docs.python.org/3/library/multiprocessing.html
-def word_count(text: str, n_processes: int) -> int:
+# - https://docs.python.org/3/library/threading.html
+# - https://docs.python.org/3/library/queue.html
+def word_count(text: str, n_threads: int) -> int:
     result_queue = Queue()
-    processes = []
-    for chunk in split_into_chunks(text, n_processes):
-        p = Process(target=word_count_task, args=(chunk, result_queue))
-        p.start()
-        processes.append(p)
-    for p in processes:
-        p.join()
-    results = [result_queue.get() for _ in range(len(processes))]
+    threads = []
+
+    for chunk in split_into_chunks(text, n_threads):
+        t = Thread(target=word_count_task, args=(chunk, result_queue))
+        t.start()
+        threads.append(t)
+
+    for t in threads:
+        t.join()
+
+    results = [result_queue.get() for _ in range(len(threads))]
     return sum(results)
 
 

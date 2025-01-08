@@ -18,3 +18,4 @@
   - [Parent class](02_classes/06_parent.md)
   - [Outro](02_classes/07_outro.md)
 - [Multithreading](03_multithreading/00_introduction.md)
+  - [Python's threads](03_multithreading/01_python_threads.md)

@@ -1,19 +1,16 @@
 # Multithreading
 
-Up until now, we've kept things quite simple: all our code was designed for sequential execution, on both the Python and Rust side.\
-It's time to spice things up a bit and explore concurrency!
+Up until now, we've kept things quite simple: all our code was designed for sequential execution, on both the Python and Rust side.
+It's time to spice things up a bit and explore concurrency[^scope]!
 
-In particular, we want to look at:
-
-- How to run multithreaded routines in Rust, with Python code waiting for them to finish
-- How to perform some processing in Rust, while allowing Python code to perform other tasks in the meantime
-- How we can synchronize across threads in Rust, keeping Python's GIL in mind
-
-We'll limit our exploration to threads and processes, without venturing into the realm of `async`/`await`.
+We won't dive straight into Rust this time.\
+We'll start by solving a few parallel processing problems in Python, to get a feel for both Python's
+multiprocessing and multithreading modules. Once we have a good grasp of how they work, we'll port our solutions
+over to Rust.
 
 ## Threads and processes
 
-Throughout this chapter we'll often refer to **threads** and **processes**.\
+Throughout this chapter we'll often mention **threads** and **processes**.\
 Let's make sure we're all on the same page about what these terms mean before moving on.
 
 ### Processes
@@ -75,6 +72,8 @@ It would allow multiple threads to execute Python code simultaneously, without f
 
 We won't cover the new free-threading mode in this course, 
 but it's worth keeping an eye on it as it matures out of the experimental phase.
+
+[^scope]: We'll limit our exploration to threads and processes, without venturing into the realm of `async`/`await`.
 
 [^mmap]: Common workarounds include memory-mapped files and shared-memory objects, but these can be quite
   difficult to work with. They also suffer from portability issues, as they rely on OS-specific features.
