@@ -21,3 +21,4 @@
   - [Python's threads](03_concurrency/01_python_threads.md)
   - [The GIL problem](03_concurrency/02_gil.md)
   - [Releasing the GIL](03_concurrency/03_releasing_the_gil.md)
+  - [Minimize GIL locking](03_concurrency/04_minimize_gil_locking.md)

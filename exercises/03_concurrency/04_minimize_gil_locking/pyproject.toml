@@ -3,7 +3,7 @@ requires = ["maturin>=1.8,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "release"
+name = "minimize"
 requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Rust",
@@ -16,13 +16,14 @@ version = "0.1.0"
 features = ["pyo3/extension-module"]
 
 [tool.uv.config-settings]
-build-args = "--profile=release"
+# Faster feedback on Rust builds
+build-args = "--profile=dev"
 
 [tool.uv]
 cache-keys = ["pyproject.toml", "Cargo.toml", "src/*.rs"]
 
 [tool.uv.sources]
-release = { workspace = true }
+minimize = { workspace = true }
 
 [tool.uv.workspace]
 members = ["sample"]

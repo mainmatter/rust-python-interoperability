@@ -18,7 +18,6 @@ It waits for the Rust function to return:
 
 The schema doesn't change even if the Rust function is multithreaded:
 
-
 ```ascii
  Time -->
 
@@ -102,6 +101,25 @@ fn fibonacci(py: Python<'_>, n: u64) -> u64 {
 This frees up the Python interpreter to run other Python code, such as the `other_work` function in our example, while the Rust
 thread is busy calculating the nth Fibonacci number.
 
+Using the same line diagram as before, we have the following:
+
+```ascii
+ Time -->
+
+          +------------+--------------------+-------------------+--------------------+
+ Python:  |  Execute   | Call Rust Function |    other_work()   |      t.join()      |
+          +------------+--------------------+-------------------+--------------------+
+                                 │                                        ▲
+                                 ▼                                        │
+          +------------+--------------------+-------------------+--------------------+
+ Rust:    |    Idle    |       Idle         |    fibonacci(n)   |  Return to Python  |
+          +------------+--------------------+-------------------+--------------------+
+                                                     ▲
+                                                     │
+                                            Python and Rust code
+                                          running concurrently here
+```
+
 ## `Ungil`
 
 `Python::allow_threads` is only sound **if the closure doesn't interact with Python objects**.\
@@ -126,8 +144,10 @@ where
 
 Unfortunately, `Ungil` is not perfect.
 On stable Rust, it leans on the `Send` trait, but that allows for some
-[unsafe interactions with Python objects](https://github.com/PyO3/pyo3/issues/2141). The tracking is more precise on `nightly` Rust,
+[unsafe interactions with Python objects](https://github.com/PyO3/pyo3/issues/2141). The tracking is more precise on `nightly` Rust[^nightly],
 but it doesn't catch [every possible misuse of `Python::allow_threads`](https://github.com/PyO3/pyo3/issues/3640).
 
-My suggestion: if you're using `Python::allow_threads`, trigger an additional run of your CI pipeline using the `nightly` Rust compiler
+My recommendation: if you're using `Python::allow_threads`, trigger an additional run of your CI pipeline using the `nightly` Rust compiler
 to catch more issues. On top of that, review your code carefully.
+
+[^nightly]: See the [`nightly` feature flag exposed by `pyo3`](https://pyo3.rs/v0.23.3/features.html#nightly).
