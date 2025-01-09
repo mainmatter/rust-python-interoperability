@@ -1,4 +1,4 @@
-use pyo3::prelude::*;
+use pyo3::{prelude::*, types::PyString};
 
 /// Use `std::thread::scope` to spawn `n_threads` threads to count words in parallel.
 ///
@@ -9,10 +9,16 @@ use pyo3::prelude::*;
 /// If you've never used `std::thread::scope` before, you can find more information here:
 /// https://rust-exercises.com/100-exercises/07_threads/04_scoped_threads.html
 #[pyfunction]
-fn word_count(text: &str, n_threads: usize) -> usize {
+fn word_count(text: Bound<'_, PyString>, n_threads: usize) -> PyResult<usize> {
     if n_threads == 0 {
         panic!("Number of threads 'n_threads' must be greater than 0");
     }
+
+    // Get a Rust view (&str) over the Python string
+    // This may fail if the string contains invalid UTF-8
+    // We go down this route, rather than asking for a `&str`
+    // directly as an argument, to avoid an extra copy of the string
+    let text = text.to_str()?;
 
     let chunks = split_into_chunks(text, n_threads);
     let mut count = 0;
@@ -29,7 +35,7 @@ fn word_count(text: &str, n_threads: usize) -> usize {
         }
     });
 
-    count
+    Ok(count)
 }
 
 /// Count words in a single chunk of text.

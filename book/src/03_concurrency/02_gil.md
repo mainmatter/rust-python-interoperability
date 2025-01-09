@@ -2,7 +2,7 @@
 
 ## Concurrent, yes, but not parallel
 
-On the surface, our thread-based solution seems to address all the issues we identified in the `multiprocessing` module:
+On the surface, our thread-based solution addresses all the issues we identified in the `multiprocessing` module:
 
 ```python
 from threading import Process
@@ -30,6 +30,8 @@ When a thread is created, we are no longer cloning the text chunk nor incurring 
         t = Thread(target=word_count_task, args=(chunk, result_queue))
 ```
 
+Since the spawned threads share the same memory space as the parent thread, they can access the `chunk` and `result_queue` directly.
+
 Nonetheless, there's a major issue with this code: **it won't actually use multiple CPU cores**.\
 It will run sequentially, even if we pass `n_threads > 1` and multiple CPU cores are available.
 
@@ -39,7 +41,7 @@ You guessed it: the infamous Global Interpreter Lock (GIL) is to blame.
 As we discussed in the [GIL chapter](../01_intro/05_gil.md),
 Python's GIL prevents multiple threads from executing Python code simultaneously[^free-threading].
 
-As a result, [thread-based parallelism](https://docs.python.org/3/library/threading.html) has historically
+As a result, thread-based parallelism has historically
 seen limited use in Python, as it doesn't provide the performance benefits one might expect from a
 multithreaded application.
 

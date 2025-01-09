@@ -22,6 +22,25 @@ Some characteristics are common across most operating systems, though. In partic
 - Its memory space, allocated by the operating system
 - A set of resources (file handles, sockets, etc.)
 
+```ascii
++------------------------+
+|        Memory          |
+|                        |
+| +--------------------+ |
+| |  Process A Space   | |  <-- Each process has a separate memory space.
+| +--------------------+ |
+|                        |
+| +--------------------+ |
+| |  Process B Space   | |
+| |                    | |
+| +--------------------+ |
+|                        |
+| +--------------------+ |
+| |  Process C Space   | |
+| +--------------------+ |
++------------------------+
+```
+
 There can be multiple processes running the same program, each with its own memory space and resources, fully
 isolated from one another.\
 The **operating system's scheduler** is in charge of deciding which process to run at any given time, partitioning CPU time

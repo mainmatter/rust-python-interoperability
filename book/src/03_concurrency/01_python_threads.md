@@ -42,6 +42,30 @@ A **thread** is an execution context **within a process**.\
 Threads share the same memory space and resources as the process that spawned them, thus allowing them to communicate
 and share data with one another more easily than processes can.
 
+
+```ascii
++------------------------+
+|        Memory          |
+|                        |
+| +--------------------+ |
+| |  Process A Space   | |  <-- Each process has its own memory space.
+| |  +-------------+   | |      Threads share the same memory space
+| |  | Thread 1    |   | |      of the process that spawned them.
+| |  | Thread 2    |   | |
+| |  | Thread 3    |   | |
+| |  +-------------+   | |
+| +--------------------+ |
+|                        |
+| +--------------------+ |
+| |  Process B Space   | |
+| |  +-------------+   | |
+| |  | Thread 1    |   | |
+| |  | Thread 2    |   | |
+| |  +-------------+   | |
+| +--------------------+ |
++------------------------+
+```
+
 Threads, just like processes, are operating system constructs.\
 The operating system's scheduler is in charge of deciding which thread to run at any given time, partitioning CPU time
 among them.
