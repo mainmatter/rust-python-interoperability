@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "functions"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 version = "0.1.0"
 classifiers = [
   "Programming Language :: Rust",

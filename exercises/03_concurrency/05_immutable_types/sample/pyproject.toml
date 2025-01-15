@@ -3,7 +3,7 @@ name = "immutable_sample"
 version = "0.1.0"
 dependencies = ["immutable"]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 
 [build-system]
 requires = ["hatchling"]

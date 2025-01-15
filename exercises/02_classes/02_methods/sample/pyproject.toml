@@ -5,7 +5,7 @@ dependencies = [
   "methods",
 ]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 
 [build-system]
 requires = ["hatchling"]
