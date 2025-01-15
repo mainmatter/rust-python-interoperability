@@ -1,0 +1,12 @@
+[package]
+name = "minimize"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+primes = { workspace = true }
+pyo3 = { workspace = true }
+rayon = { workspace = true }
