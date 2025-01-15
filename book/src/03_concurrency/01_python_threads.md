@@ -23,7 +23,7 @@ def word_count(text: str, n_processes: int) -> int:
 Let's focus, in particular, on process creation:
 
 ```python
-        p = Process(target=word_count_task, args=(chunk, result_queue))
+p = Process(target=word_count_task, args=(chunk, result_queue))
 ```
 
 The parent process (the one executing `word_count`) doesn't share memory with the child process (the one
@@ -41,7 +41,6 @@ A more straightforward solution is to use **threads** instead of processes.
 A **thread** is an execution context **within a process**.\
 Threads share the same memory space and resources as the process that spawned them, thus allowing them to communicate
 and share data with one another more easily than processes can.
-
 
 ```ascii
 +------------------------+
@@ -87,11 +86,11 @@ The API of the `Thread` class, in particular, mirrors what you already know from
 - [`Queue` class](https://docs.python.org/3/library/queue.html)
 
 [^pickle]: To be more precise, the `multiprocessing` module uses the `pickle` module to serialize the objects
-   that must be passed as arguments to the child process.
-   The serialized data is then sent to the child process, as a byte stream, over an operating system pipe.
-   On the other side of the pipe, the child process deserializes the byte stream back into Python objects using `pickle`
-   and passes them to the target function.\
-   This all system has higher overhead than a "simple" deep copy.
+that must be passed as arguments to the child process.
+The serialized data is then sent to the child process, as a byte stream, over an operating system pipe.
+On the other side of the pipe, the child process deserializes the byte stream back into Python objects using `pickle`
+and passes them to the target function.\
+This all system has higher overhead than a "simple" deep copy.
 
 [^mmap]: Common workarounds include memory-mapped files and shared-memory objects, but these can be quite
-  difficult to work with. They also suffer from portability issues, as they rely on OS-specific features.
+difficult to work with. They also suffer from portability issues, as they rely on OS-specific features.

@@ -27,7 +27,7 @@ def word_count(text: str, n_threads: int) -> int:
 When a thread is created, we are no longer cloning the text chunk nor incurring the overhead of inter-process communication:
 
 ```python
-        t = Thread(target=word_count_task, args=(chunk, result_queue))
+t = Thread(target=word_count_task, args=(chunk, result_queue))
 ```
 
 Since the spawned threads share the same memory space as the parent thread, they can access the `chunk` and `result_queue` directly.
@@ -60,7 +60,7 @@ pure Rust threads are not affected by the GIL, as long as they don't need to int
 Let's rewrite again our `word_count` function, this time in Rust!
 
 [^free-threading]: This is the current state of Python's concurrency model. There are some exciting changes on the horizon, though!
-  [`CPython`'s free-threading mode](https://docs.python.org/3/howto/free-threading-python.html) is an experimental feature
-  that aims to remove the GIL entirely.
-  It would allow multiple threads to execute Python code simultaneously, without forcing developers to rely on multiprocessing.
-  We won't cover the new free-threading mode in this course, but it's worth keeping an eye on it as it matures out of the experimental phase.
+[`CPython`'s free-threading mode](https://docs.python.org/3/howto/free-threading-python.html) is an experimental feature
+that aims to remove the GIL entirely.
+It would allow multiple threads to execute Python code simultaneously, without forcing developers to rely on multiprocessing.
+We won't cover the new free-threading mode in this course, but it's worth keeping an eye on it as it matures out of the experimental phase.

@@ -7,6 +7,6 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { workspace = true }
 primes = { workspace = true }
+pyo3 = { workspace = true }
 rayon = { workspace = true }
