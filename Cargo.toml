@@ -1,9 +1,10 @@
 [workspace]
-members = ["exercises/*/*"]
+members = ["exercises/*/*", "verifier"]
 resolver = "2"
 
 [workspace.dependencies]
 anyhow = "1"
+duct = "0.13"
 pyo3 = "0.23.3"
 semver = "1.0.23"
 serde = "1.0.204"

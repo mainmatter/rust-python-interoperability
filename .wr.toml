@@ -1,13 +1,3 @@
 [[verification]]
 command = "cargo"
-args = ["test"]
-
-[[verification]]
-command = "uv"
-# We use `--all-packages` to avoid having to specify `pytest` as a dev
-# dependency in all packages.
-args = ["sync", "--all-packages"]
-
-[[verification]]
-command = "uv"
-args = ["run", "pytest"]
+args = ["run", "--package", "verifier", "--bin", "verifier"]
