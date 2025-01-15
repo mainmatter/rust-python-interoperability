@@ -1,0 +1,25 @@
+[build-system]
+requires = ["maturin>=1.8,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "outro3"
+requires-python = ">=3.13"
+classifiers = [
+  "Programming Language :: Rust",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+version = "0.1.0"
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+
+[tool.uv]
+cache-keys = ["pyproject.toml", "Cargo.toml", "src/*.rs"]
+
+[tool.uv.sources]
+outro3 = { workspace = true }
+
+[tool.uv.workspace]
+members = ["sample"]
