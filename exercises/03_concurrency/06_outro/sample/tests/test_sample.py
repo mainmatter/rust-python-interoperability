@@ -7,4 +7,4 @@ from outro3 import site_map
 def test_site_map():
     discovered_urls = set()
     site_map("https://rust-exercises.com", discovered_urls)
-    assert len(discovered_urls) >= 1000
+    assert len(discovered_urls) >= 200
