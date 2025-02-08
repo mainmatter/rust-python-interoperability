@@ -19,7 +19,7 @@ impl Wallet {
 }
 ```
 
-`Wallet::get_default` is a static method since it doesn't take `self` or references to `self` as arguments.\
+`Wallet::default` is a static method since it doesn't take `self` or references to `self` as arguments.\
 You might then expect the following to define a Python static method on the `Wallet` class:
 
 ```rust
