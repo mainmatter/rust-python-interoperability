@@ -28,26 +28,27 @@ def test_visibility():
     with pytest.raises(AttributeError):
         order.price = 20
 
-@pytest.mark.fail(reason="Negative prices are not supported", raises=ValueError)
+@pytest.mark.xfail(reason="Negative prices are not supported", raises=ValueError)
 def test_negative_price():
     ShoppingOrder("apple", -10, 5)
 
-@pytest.mark.fail(reason="Negative quantities are not supported", raises=ValueError)
+@pytest.mark.xfail(reason="Negative quantities are not supported", raises=ValueError)
 def test_negative_quantity():
     ShoppingOrder("apple", 10, -5)
 
-@pytest.mark.fail(reason="Zero quantities are not supported", raises=ValueError)
+@pytest.mark.xfail(reason="Zero quantities are not supported", raises=ValueError)
 def test_zero_quantity():
     ShoppingOrder("apple", 10, 0)
 
-@pytest.mark.fail(reason="Zero prices are not supported", raises=ValueError)
+@pytest.mark.xfail(reason="Zero prices are not supported", raises=ValueError)
 def test_zero_price():
     ShoppingOrder("apple", 0, 5)
 
-@pytest.mark.fail(reason="Name can't be empty", raises=ValueError)
+@pytest.mark.xfail(reason="Name can't be empty", raises=ValueError)
 def test_empty_name():
     ShoppingOrder("", 10, 5)
 
-@pytest.mark.fail(reason="Name can't be just whitespace", raises=ValueError)
+@pytest.mark.xfail(reason="Name can't be just whitespace", raises=ValueError)
 def test_whitespace_name():
     ShoppingOrder("  ", 10, 5)
+
