@@ -24,6 +24,6 @@ def test_ten():
     assert out == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
 
-@pytest.mark.xfail(reason="It makes no sense to ask for the -5th number in Fibonacci's sequence", raises=OverflowError)
+@pytest.mark.xfail(strict=True, reason="It makes no sense to ask for the -5th number in Fibonacci's sequence", raises=OverflowError)
 def test_negative_numbers():
     fibonacci(-5)
