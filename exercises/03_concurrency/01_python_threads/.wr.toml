@@ -1,0 +1,9 @@
+skip_build = true
+
+[[verification]]
+command = "uv"
+args = ["sync", "--all-packages"]
+
+[[verification]]
+command = "uv"
+args = ["run", "pytest"]
