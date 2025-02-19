@@ -1,3 +1,5 @@
+skip_build = true
+
 [[verification]]
 command = "cargo"
 args = ["run", "--package", "verifier", "--bin", "verifier"]
