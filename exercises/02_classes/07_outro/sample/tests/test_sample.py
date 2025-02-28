@@ -99,8 +99,9 @@ def test_seasonal_discount_validation_negative_percentage():
     assert str(exc_info.value) == "Percentage must be between 0 and 1"
 
 def test_seasonal_discount_validation_expired():
+    discount = SeasonalDiscount(0.5, datetime.now(UTC) - timedelta(days=2), datetime.now(UTC) - timedelta(days=1))
     with pytest.raises(ExpiredDiscount) as exc_info:
-        SeasonalDiscount(0.5, datetime.now(UTC) - timedelta(days=2), datetime.now(UTC) - timedelta(days=1))
+        discount.apply(100)
     assert str(exc_info.value) == "The discount is no longer active"
 
 def test_seasonal_discount_validation_from_after_to_setter():
