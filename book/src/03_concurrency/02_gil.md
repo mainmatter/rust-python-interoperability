@@ -5,7 +5,7 @@
 On the surface, our thread-based solution addresses all the issues we identified in the `multiprocessing` module:
 
 ```python
-from threading import Process
+from threading import Thread
 from queue import Queue
 
 def word_count(text: str, n_threads: int) -> int:
