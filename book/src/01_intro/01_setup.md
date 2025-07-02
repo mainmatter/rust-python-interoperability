@@ -141,7 +141,7 @@ fn setup(m: &Bound<'_, PyModule>) -> PyResult<()> {
 }
 ```
 
-We're using `pyo3` to define a Python function, named `it_works`, that returns a boolean.
+We're using `pyo3` to define a Rust function, named `it_works`, that returns a boolean.
 The function is then exposed to Python at the top-level of our extension module, named `setup`.
 
 That same function is then invoked from Python, inside `sample/tests/test_sample.py`:
