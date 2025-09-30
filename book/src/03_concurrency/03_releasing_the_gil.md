@@ -44,7 +44,7 @@ which internally hold a `Python<'py>` instance.\
 There's no way around it: any interaction with Python objects must be serialized. But, here's the kicker: not all Rust code needs to
 interact with Python objects!
 
-## `Python::allow_threads`
+## `Python::detach`
 
 For example, consider a Rust function that calculates the nth Fibonacci number:
 
@@ -84,7 +84,7 @@ We can fix it by explicitly releasing the GIL:
 ```rust
 #[pyfunction]
 fn fibonacci(py: Python<'_>, n: u64) -> u64 {
-    py.allow_threads(|| {
+    py.detach(|| {
         let mut a = 0;
         let mut b = 1;
         for _ in 0..n {
@@ -97,7 +97,7 @@ fn fibonacci(py: Python<'_>, n: u64) -> u64 {
 }
 ```
 
-`Python::allow_threads` releases the GIL while executing the closure passed to it.\
+`Python::detach` releases the GIL while executing the closure passed to it.\
 This frees up the Python interpreter to run other Python code, such as the `other_work` function in our example, while the Rust
 thread is busy calculating the nth Fibonacci number.
 
@@ -122,18 +122,18 @@ Using the same line diagram as before, we have the following:
 
 ## `Ungil`
 
-`Python::allow_threads` is only sound **if the closure doesn't interact with Python objects**.\
+`Python::detach` is only sound **if the closure doesn't interact with Python objects**.\
 If that's not the case, we end up with undefined behavior: Rust code touching Python objects while the Python interpreter is running
 other Python code, assuming nothing else is happening to those objects thanks to the GIL. A recipe for disaster!
 
 It'd be ideal to rely on the type system to enforce this constraint for us at compile-time, in true Rust fashion—"if it compiles, it's
 safe."\
-`pyo3` _tries_ to follow this principle with the [`Ungil` marker trait](https://docs.rs/pyo3/0.23.3/pyo3/marker/trait.Ungil.html):
+`pyo3` _tries_ to follow this principle with the [`Ungil` marker trait](https://docs.rs/pyo3/0.26.0/pyo3/marker/trait.Ungil.html):
 only types that are safe to access without the GIL can implement `Ungil`. The trait is then used to constrain the arguments of
-`Python::allow_threads`:
+`Python::detach`:
 
 ```rust
-pub fn allow_threads<T, F>(self, f: F) -> T
+pub fn detach<T, F>(self, f: F) -> T
 where
     F: Ungil + FnOnce() -> T,
     T: Ungil,
@@ -145,9 +145,9 @@ where
 Unfortunately, `Ungil` is not perfect.
 On stable Rust, it leans on the `Send` trait, but that allows for some
 [unsafe interactions with Python objects](https://github.com/PyO3/pyo3/issues/2141). The tracking is more precise on `nightly` Rust[^nightly],
-but it doesn't catch [every possible misuse of `Python::allow_threads`](https://github.com/PyO3/pyo3/issues/3640).
+but it doesn't catch [every possible misuse of `Python::detach`](https://github.com/PyO3/pyo3/issues/3640).
 
-My recommendation: if you're using `Python::allow_threads`, trigger an additional run of your CI pipeline using the `nightly` Rust compiler
+My recommendation: if you're using `Python::detach`, trigger an additional run of your CI pipeline using the `nightly` Rust compiler
 to catch more issues. On top of that, review your code carefully.
 
 [^nightly]: See the [`nightly` feature flag exposed by `pyo3`](https://pyo3.rs/v0.23.3/features.html#nightly).

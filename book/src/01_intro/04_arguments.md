@@ -4,7 +4,7 @@
 
 ```rust
 use pyo3::prelude::*;
-    
+
 #[pyfunction]
 fn no_op() {
     // Do nothing
@@ -35,7 +35,7 @@ Python objects into Rust types.
 ## Available implementations
 
 `pyo3` provides implementations of `FromPyObject` for a large number of types—e.g. `i32`, `f64`, `String`, `Vec`, etc.
-You can find an exhaustive list in [`pyo3`'s guide](https://pyo3.rs/v0.23.3/conversions/tables#argument-types),
+You can find an exhaustive list in [`pyo3`'s guide](https://pyo3.rs/v0.26.0/conversions/tables#argument-types),
 under the "Rust" table column.
 
 ## Conversion cost
@@ -53,4 +53,4 @@ Don't try to use them to solve the exercise for this section: we'll cover them i
 
 ## References
 
-- [The `FromPyObject` trait](https://docs.rs/pyo3/0.23.3/pyo3/conversion/trait.FromPyObject.html)
+- [The `FromPyObject` trait](https://docs.rs/pyo3/0.26.0/pyo3/conversion/trait.FromPyObject.html)

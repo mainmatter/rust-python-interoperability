@@ -82,7 +82,7 @@ holding the GIL—i.e. via `Py<T>` instead of `Bound<'py, T>`
 #[pyfunction]
 fn print_point<'py>(python: Python<'py>, point: Bound<'py, Point>) {
     let point: Py<Point> = point.unbind();
-    python.allow_threads(|| {
+    python.detach(|| {
         // We can now access the fields of the Point struct
         // even though we are not holding the GIL
         let point: &Point = point.get();

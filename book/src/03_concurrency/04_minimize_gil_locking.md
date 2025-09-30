@@ -3,7 +3,7 @@
 All our examples so far fall into two categories:
 
 - The Rust function holds the GIL for the entire duration of its execution.
-- The Rust function doesn't hold the GIL at all, going straight into `Python::allow_threads` mode.
+- The Rust function doesn't hold the GIL at all, going straight into `Python::detach` mode.
 
 Real-world applications are often more nuanced, though.\
 You'll need to hold the GIL for some operations (e.g. passing data back to Python), but you're able to release it
@@ -28,7 +28,7 @@ fn update_in_place<'py>(
 ) -> PyResult<()> {
     // Holding the GIL
     let v: Vec<i32> = numbers.extract()?;
-    let updated_v: Vec<_> = python.allow_threads(|| {
+    let updated_v: Vec<_> = python.detach(|| {
         v.iter().map(|&n| expensive_computation(n)).collect()
     });
     // Back to holding the GIL
@@ -61,7 +61,7 @@ fn update_in_place<'py>(
     python: Python<'py>,
     numbers: Bound<'py, PyList>
 ) -> PyResult<()> {
-    python.allow_threads(|| -> PyResult<()> {
+    python.detach(|| -> PyResult<()> {
         let n_numbers = numbers.len();
         for i in 0..n_numbers {
             let n = numbers.get_item(i)?.extract::<i64>()?;
@@ -73,7 +73,7 @@ fn update_in_place<'py>(
 }
 ```
 
-It won't compile, though. We're using a GIL-bound object (`numbers`) in a GIL-free section (inside `python.allow_threads`).
+It won't compile, though. We're using a GIL-bound object (`numbers`) in a GIL-free section (inside `python.detach`).
 We need to **unbind** it first.
 
 ### `Py<T>` and `Bound<'py, T>`
@@ -88,7 +88,7 @@ fn update_in_place<'py>(
     numbers: Bound<'py, PyList>
 ) -> PyResult<()> {
     let numbers = numbers.unbind();
-    python.allow_threads(|| -> PyResult<()> {
+    python.detach(|| -> PyResult<()> {
         let n_numbers = numbers.len();
         for i in 0..n_numbers {
             let n = numbers.get_item(i)?.extract::<i64>()?;
@@ -104,8 +104,8 @@ But it won't compile either. `numbers.len()`, `numbers.get_item(i)`, and `number
 `Py<T>` is just a pointer to a Python object, it won't allow us to access it if we're not holding the GIL.
 
 We need to **re-bind** it using a `Python<'py>` token, thus getting a `Bound<'py, PyList>` back.
-How do we get a `Python<'py>` token inside the closure, though? Using `Python::with_gil`: it's the opposite
-of `Python::allow_threads`, it makes sure to acquire the GIL before executing the closure and release it afterwards.
+How do we get a `Python<'py>` token inside the closure, though? Using `Python::attach`: it's the opposite
+of `Python::detach`, it makes sure to acquire the GIL before executing the closure and release it afterwards.
 The closure is given a `Python` token as argument, which we can use to re-bind the `PyList` object:
 
 ```rust
@@ -117,11 +117,11 @@ fn update_in_place<'py>(
     let n_numbers = numbers.len();
     let numbers_ref = numbers.unbind();
     // Release the GIL
-    python.allow_threads(|| -> PyResult<()> {
+    python.detach(|| -> PyResult<()> {
         for i in 0..n_numbers {
             // Acquire the GIL again, to access the
             // i-th element of the list
-            let n = Python::with_gil(|inner_py| {
+            let n = Python::attach(|inner_py| {
                 numbers_ref
                     .bind(inner_py)
                     .get_item(i)?
@@ -130,7 +130,7 @@ fn update_in_place<'py>(
             // Run the computation without holding the GIL
             let result = expensive_computation(n);
             // Re-acquire the GIL to update the list in place
-            Python::with_gil(|inner_py| {
+            Python::attach(|inner_py| {
                 numbers_ref.bind(inner_py).set_item(i, result)
             })?;
         }
@@ -156,6 +156,6 @@ you get with the GIL.
 
 ## References
 
-- [`Py<T>` struct](https://docs.rs/pyo3/0.23.3/pyo3/struct.Py.html)
-- [`Python::with_gil` method](https://docs.rs/pyo3/0.23.3/pyo3/marker/struct.Python.html#method.with_gil)
-- [`Bound<'py, T>::unbind` method](https://docs.rs/pyo3/0.23.3/pyo3/prelude/struct.Bound.html#method.unbind)
+- [`Py<T>` struct](https://docs.rs/pyo3/0.26.0/pyo3/struct.Py.html)
+- [`Python::attach` method](https://docs.rs/pyo3/0.26.0/pyo3/marker/struct.Python.html#method.attach)
+- [`Bound<'py, T>::unbind` method](https://docs.rs/pyo3/0.26.0/pyo3/prelude/struct.Bound.html#method.unbind)

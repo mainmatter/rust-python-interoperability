@@ -54,7 +54,7 @@ impl<'py> IntoPyObject<'py> for MyType {
     /// It captures the ownership relationship between the Python object
     /// and the Python runtime.
     /// In this case, we're using a `Bound` smart pointer to a `PyInt`.
-    /// The `'py` lifetime ensures that the Python object is owned 
+    /// The `'py` lifetime ensures that the Python object is owned
     /// by the Python runtime.
     type Output = Bound<'py, PyInt>;
     /// Since the conversion can fail, we need to specify an error type.
@@ -63,7 +63,7 @@ impl<'py> IntoPyObject<'py> for MyType {
     type Error = Infallible;
 
     fn into_pyobject(self, py: Python<'py>) -> Result<Self::Output, Self::Error> {
-        // `u64` already implements `IntoPyObject`, so we delegate 
+        // `u64` already implements `IntoPyObject`, so we delegate
         // to its implementation to do the actual conversion.
         self.value.into_pyobject(py)
     }
@@ -76,13 +76,13 @@ Let's focus on the `Output` associated type for a moment.\
 In almost all cases, you'll be setting `Output` to `Bound<'py, Self::Target>`[^syntax]. You're creating a new Python
 object and its lifetime is tied to the Python runtime.
 
-In a few cases, you might be able to rely on [`Borrowed<'a, 'py, Self::Target>`](https://docs.rs/pyo3/0.23.3/pyo3/prelude/struct.Borrowed.html)
+In a few cases, you might be able to rely on [`Borrowed<'a, 'py, Self::Target>`](https://docs.rs/pyo3/0.26.0/pyo3/prelude/struct.Borrowed.html)
 instead.
 It's slightly faster[^conversation], but it's limited to scenarios where you are borrowing from an existing Python object—fairly
 rare for an `IntoPyObject` implementation.
 
 There are no other options for `Output`, since `Output` must implement
-[the `BoundObject` trait](https://docs.rs/pyo3/0.23.3/pyo3/trait.BoundObject.html),
+[the `BoundObject` trait](https://docs.rs/pyo3/0.26.0/pyo3/trait.BoundObject.html),
 the trait is [sealed](https://predr.ag/blog/definitive-guide-to-sealed-traits-in-rust/) and
 those two types are the only implementors within `pyo3`.\
 If it helps, think of `Output` as an enum with two variants: `Bound` and `Borrowed`.
@@ -90,7 +90,7 @@ If it helps, think of `Output` as an enum with two variants: `Bound` and `Borrow
 ## Provided implementations
 
 `pyo3` provides out-of-the-box implementations of `IntoPyObject` for many Rust types, as well as for all `Py*` types.
-Check out [its documentation](https://docs.rs/pyo3/0.23.3/pyo3/conversion/trait.IntoPyObject.html#foreign-impls)
+Check out [its documentation](https://docs.rs/pyo3/0.26.0/pyo3/conversion/trait.IntoPyObject.html#foreign-impls)
 for an exhaustive list.
 
 [^syntax]: The actual syntax is a bit more complex: `type Output = Bound<'py, <Self as IntoPyObject<'py>>::Target>>;`.
