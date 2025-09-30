@@ -21,10 +21,10 @@ impl Rectangle {
 ///
 /// # Constraints
 ///
-/// Do NOT remove the `allow_threads` call. The computation must be done inside
-/// the closure passed to `allow_threads`.
+/// Do NOT remove the `detach` call. The computation must be done inside
+/// the closure passed to `detach`.
 fn compute_area<'py>(python: Python<'py>, shape: Bound<'py, Rectangle>) -> u32 {
-    python.allow_threads(|| {
+    python.detach(|| {
         let area: u32 = todo!();
         area
     })

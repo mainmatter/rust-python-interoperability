@@ -50,7 +50,7 @@ impl Child {
     fn new(name: String, age: u8) -> PyClassInitializer<Self> {
         // [...]
     }
-    
+
     fn greet(&self) {
         println!("Hi, I'm {} and I'm {} years old!", self.name, self.age);
     }
@@ -71,7 +71,7 @@ This can be done using another one of `pyo3`'s smart pointers: `PyRef`.
 #[pymethods]
 impl Child {
     // [...]
-    
+
     fn greet(self_: PyRef<'_, Self>) {
         todo!()
     }
@@ -79,14 +79,14 @@ impl Child {
 ```
 
 `PyRef` represents an immutable reference to the Python object.\
-It allows us, in particular, to call the [`as_super`](https://docs.rs/pyo3/0.23.3/pyo3/pycell/struct.PyRef.html#method.as_super) method,
+It allows us, in particular, to call the [`as_super`](https://docs.rs/pyo3/0.26.0/pyo3/pycell/struct.PyRef.html#method.as_super) method,
 which returns a reference to the parent class.
 
 ```rust
 #[pymethods]
 impl Child {
     // [...]
-    
+
     fn greet(self_: PyRef<'_, Self>) {
         // This is now a reference to a `Parent` instance!
         let parent = self_.as_super();
