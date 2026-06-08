@@ -9,6 +9,6 @@ crate-type = ["cdylib"]
 [dependencies]
 crossbeam = "0.8"
 pyo3 = { workspace = true }
-scraper = "0.22"
-ureq = "2"
+scraper = "0.27"
+ureq = "3"
 url = "2"
